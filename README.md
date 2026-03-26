@@ -56,7 +56,7 @@ NUCampus360 is an interactive web application combining a live campus map, 360-d
 
 ### External Services & APIs
 
--   **Claude API (Anthropic)**: Large language model for the AI guide
+-   **Gemini API (Google)**: Large language model for the AI guide
 -   **Cloudinary (Optional)**: Hosting for equirectangular panoramic images
 
 ### Infrastructure & Deployment
@@ -85,7 +85,7 @@ NUCampus360 is an interactive web application combining a live campus map, 360-d
          │ REST /api             │ Secure API Calls      │
          ▼                       ▼                       ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ • MapPanel      │    │ • API Routes    │    │ • Claude API    │
+│ • MapPanel      │    │ • API Routes    │    │ • Gemini API    │
 │ • ChatPanel     │    │ • Rate Limiter  │    │ • OpenStreetMap │
 │ • TourPanel     │    │ • Data Access   │    │ • Cloudinary    │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
@@ -133,7 +133,7 @@ User Input
     │
     ▼
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│ Input       │───▶│ Backend     │───▶│ Claude API  │
+│ Input       │───▶│ Backend     │───▶│ Gemini API  │
 │ Validation  │    │ Rate Limit  │    │ Processing  │
 │ (Frontend)  │    │ & Auth      │    │             │
 └─────────────┘    └─────────────┘    └─────────────┘
@@ -208,7 +208,7 @@ Instead of a relational database, the system relies on a high-performance, stati
 ### 2. AI Chat Interaction
 
 -   **Endpoint**: `POST /api/chat`
--   **Description**: Processes user queries through the Claude API with injected campus context.
+-   **Description**: Processes user queries through the Gemini API with injected campus context.
 -   **Body**: `{"message": "string", "history": []}`
 -   **Response**: `200 OK` (Returns AI text response)
 
@@ -248,7 +248,7 @@ App Root
 
 -   Node.js: 18+
 -   NPM or Yarn
--   Anthropic API Key
+-   Gemini API Key
 
 ### Local Development Setup
 
@@ -270,7 +270,7 @@ cd ../frontend && npm install
 ```bash
 cd backend
 cp .env.example .env
-# Open .env and set ANTHROPIC_API_KEY=your_key_here
+# Open .env and set GEMINI_API_KEY=your_key_here
 ```
 
 #### Start Development Servers
@@ -290,7 +290,7 @@ cd frontend && npm run dev
 1.  Connect repository to Render as a New Web Service.
 2.  Apply `render.yaml` configuration.
 3.  Set Environment Variables:
-    -   `ANTHROPIC_API_KEY`: [Your Key]
+    -   `GEMINI_API_KEY`: [Your Key]
     -   `ALLOWED_ORIGINS`: [Your Vercel Domain]
 
 #### Frontend (Vercel)
@@ -364,7 +364,7 @@ All static data regarding the campus is maintained in `backend/data/campus.js`. 
 
 ### Security Measures
 
--   **API Key Isolation**: The Anthropic API key is strictly maintained on the backend server and is never exposed to the client browser.
+-   **API Key Isolation**: The Gemini API key is strictly maintained on the backend server and is never exposed to the client browser.
 -   **Rate Limiting**: Implemented on the backend (60 requests/15 minutes globally, 10 requests/minute for chat) to prevent abuse.
 -   **CORS Configuration**: Cross-Origin Resource Sharing is strictly limited to the defined frontend production domain.
 -   **Input Sanitization**: Chat messages are length-capped and role-validated prior to API submission.

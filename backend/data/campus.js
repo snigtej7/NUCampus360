@@ -27,9 +27,9 @@ const buildings = [
     hours: "Mon–Fri: 8am–8pm | Sat: 10am–4pm | Sun: Closed",
     amenities: ["Kitchen Island", "Red Bar Stools", "Coffee Station", "World Map Wall", "Communal Tables"],
     scenes: [
-      { file: "tours/Dining/dining (1).jpg", label: "Global Wall", hfov: 110 },
-      { file: "tours/Dining/dining (2).jpg", label: "Island View", hfov: 110 },
-      { file: "tours/Dining/dining (3).jpg", label: "Kitchen", hfov: 110 }
+      { file: "tours/Dining/dining (1).jpg", label: "Dining Area", hfov: 110 },
+      { file: "tours/Dining/dining (2).jpg", label: "Husky Board", hfov: 110 },
+      { file: "tours/Dining/dining (3).jpg", label: "Global Wall", hfov: 110 }
     ]
   },
   {

@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: npm test
         env:
-          ANTHROPIC_API_KEY: sk-ant-test-key-placeholder
+          GEMINI_API_KEY: test-key-placeholder
           NODE_ENV: test
 
   frontend-build:

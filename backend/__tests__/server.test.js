@@ -1,10 +1,10 @@
 const request = require('supertest');
 const app = require('../server');
-const Anthropic = require('@anthropic-ai/sdk');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { createMockMessage, createMockHistory, createMockApiResponse } = require('./test-utils');
 
-// Mock the Anthropic SDK
-jest.mock('@anthropic-ai/sdk');
+// Mock the Gemini SDK
+jest.mock('@google/generative-ai');
 
 describe('NUCampus360 API — Comprehensive Test Suite', () => {
   
@@ -134,12 +134,12 @@ describe('NUCampus360 API — Comprehensive Test Suite', () => {
 
   describe.skip('POST /api/chat — Input Validation', () => {
     beforeEach(() => {
-      const mockAnthropicInstance = {
-        messages: {
-          create: jest.fn().mockResolvedValue(createMockApiResponse())
-        }
+      const mockGeminiInstance = {
+        getGenerativeModel: jest.fn().mockReturnValue({
+          generateContent: jest.fn().mockResolvedValue(createMockApiResponse())
+        })
       };
-      Anthropic.mockImplementation(() => mockAnthropicInstance);
+      GoogleGenerativeAI.mockImplementation(() => mockGeminiInstance);
     });
 
     it('returns 400 if messages field is missing', async () => {
@@ -372,8 +372,8 @@ describe('NUCampus360 API — Comprehensive Test Suite', () => {
 
     it('returns mock response when no API key configured', async () => {
       // Temporarily clear API key
-      const originalKey = process.env.ANTHROPIC_API_KEY;
-      delete process.env.ANTHROPIC_API_KEY;
+      const originalKey = process.env.GEMINI_API_KEY;
+      delete process.env.GEMINI_API_KEY;
       
       const res = await request(app)
         .post('/api/chat')
@@ -384,7 +384,7 @@ describe('NUCampus360 API — Comprehensive Test Suite', () => {
       expect(res.body.reply).toContain('Mock mode');
       
       // Restore API key
-      process.env.ANTHROPIC_API_KEY = originalKey;
+      process.env.GEMINI_API_KEY = originalKey;
     });
 
     it('includes informative error messages', async () => {
@@ -571,12 +571,8 @@ describe('NUCampus360 API — Comprehensive Test Suite', () => {
 
   describe('Integration Tests', () => {
     beforeEach(() => {
-      const mockAnthropicInstance = {
-        messages: {
-          create: jest.fn().mockResolvedValue(createMockApiResponse())
-        }
-      };
-      Anthropic.mockImplementation(() => mockAnthropicInstance);
+      // No mocking needed for campus/health tests
+      // Gemini tests are skipped below
     });
 
     it.skip('completes full user journey: health → campus → chat', async () => {
