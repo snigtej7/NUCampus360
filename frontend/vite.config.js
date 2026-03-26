@@ -10,6 +10,11 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true
+      },
+      // Proxy /data calls to the backend during local development
+      '/data': {
+        target: 'http://localhost:3001',
+        changeOrigin: true
       }
     }
   },

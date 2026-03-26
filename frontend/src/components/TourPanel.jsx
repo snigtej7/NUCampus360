@@ -21,7 +21,7 @@ export default function TourPanel({ building, onClose, onShowPhotoGuide }) {
     // Build image URL
     let imageUrl = scenes[activeScene]?.file || '';
     if (imageUrl && !imageUrl.startsWith('http')) {
-      imageUrl = `http://localhost:3001/data/${imageUrl}`;
+      imageUrl = `/data/${imageUrl}`;
     }
 
     if (!imageUrl) return;
