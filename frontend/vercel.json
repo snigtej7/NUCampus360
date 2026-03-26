@@ -5,7 +5,8 @@
   "installCommand": "npm install",
   "framework": "vite",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://nucampus360.onrender.com/api/$1" }
+    { "source": "/api/(.*)", "destination": "https://nucampus360.onrender.com/api/$1" },
+    { "source": "/data/(.*)", "destination": "https://nucampus360.onrender.com/data/$1" }
   ],
   "headers": [
     {
