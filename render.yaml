@@ -1,0 +1,20 @@
+# render.yaml — Deploy the NUCampus360 backend to Render.com for free
+# Commit this file to the root of your repo, then connect on render.com
+
+services:
+  - type: web
+    name: nucampus360-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false        # Set this manually in the Render dashboard — never commit it
+      - key: ALLOWED_ORIGINS
+        sync: false        # Set to your Vercel frontend URL, e.g. https://nucampus360.vercel.app
+      - key: PORT
+        value: 3001
